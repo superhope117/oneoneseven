@@ -1,22 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" />
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="hidden">
-    <meta name="apple-mobile-web-app-title" content="Firefly">
+    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1"/>
+	
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="hidden">
+	<meta name="apple-mobile-web-app-title" content="Firefly">
 
     <title>YFSP</title>
     <style>
-        html {
-            margin: 0;
-            padding: 0;
+	    html {
+			margin: 0;
+			padding: 0;
             background-color: #000;
-        }
-
+		}
+	
         body {
             margin: 0;
             overflow: hidden;
@@ -46,6 +47,31 @@
         }
     </style>
     <script>
+
+        // Function to update iframe source based on parameter value
+        function updateIframeSource() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const param1 = urlParams.get('url');
+          const param2 = urlParams.get('title');
+          const iframe = document.getElementById('paramIframe');
+
+          if (param1) {
+            // Set the iframe source URL based on the parameter value
+            iframe.src = `${param1}`;
+          } else {
+            // Set a default source or clear the source if parameter value is empty
+            iframe.src = ''; // You can set a default source URL here
+          }
+
+          // Set title based on param2 value
+          if (param2) {
+            document.title = param2;
+          } else {
+            // Set default title if param2 is empty
+            document.title = "URL Parameters";
+          }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');
             let timeoutId;
@@ -73,21 +99,24 @@
             });
         });
 
-        function updateURL() {
-            const param1Value = document.getElementById('param1Input').value;
-            const param2Value = document.getElementById('param2Input').value;
-            const param3Value = document.getElementById('param3Input').value;
 
-            const url = new URL('https://myurl/');
-            url.searchParams.set('param1', param1Value);
-            url.searchParams.set('param2', param2Value);
-            
-            // Encode param3 using encodeURI before setting it in the URL
-            const encodedParam3 = encodeURI(param3Value);
-            url.searchParams.set('param3', encodedParam3);
-            
-            window.location.href = url.href;
-        }
+    // Call the function when the page loads to populate iframe source and title from URL parameters
+    window.onload = function() {
+      updateIframeSource();
+      updatePageTitle();
+    };
+
+    // Function to update page title from URL parameter
+    function updatePageTitle() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const param2 = urlParams.get('param2');
+
+      if (param2) {
+        document.title = param2;
+      }
+    }
+
+
     </script>
 </head>
 
@@ -96,13 +125,8 @@
         <!-- Add your navbar content here -->
         Navbar content
     </div>
-    <input type="text" id="param1Input" placeholder="Parameter 1">
-    <input type="text" id="param2Input" placeholder="Parameter 2">
-    <input type="text" id="param3Input" placeholder="Parameter 3">
-
-    <button onclick="updateURL()">Update URL</button>
-
-    <iframe src="https://myurl/" allowfullscreen></iframe>
+    <iframe id="paramIframe" src="https://google.com" allowfullscreen></iframe>
 </body>
 
 </html>
+
