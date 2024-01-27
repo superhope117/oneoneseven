@@ -4,25 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1"/>
-	
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="hidden">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="hidden">
     <link rel="apple-touch-icon" href=""/>
 
     <title>Proto</title>
     <style>
-	    html {
-			margin: 0;
-			padding: 0;
+        html {
+            margin: 0;
+            padding: 0;
             background-color: #000;
-		}
+        }
 	
         body {
             margin: 0;
             overflow: hidden;
             background-color: #000;
         }
-
 
         iframe {
             position: absolute;
@@ -46,7 +44,6 @@
         }
     </style>
     <script>
-
         // Function to update iframe source based on parameter value
         function updateIframeSource() {
           const urlParams = new URLSearchParams(window.location.search);
@@ -85,7 +82,7 @@
 
     // Call the function when the page loads to populate iframe source and title from URL parameters
     window.onload = function() {
-      updateIframeSource();
+        updateIframeSource();
     };
 
     </script>
