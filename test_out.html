@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Links</title>
+</head>
+<body>
+
+<div id="linkList"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Your JSON data
+    var jsonData = [
+        {
+            "url": "https://www.yfsp.tv/",
+            "title": "YFSP",
+            "icon": "https://www.yfsp.tv/favicon.ico"
+        }
+    ];
+
+    // Function to create a clickable link
+    function createLink(linkData) {
+        var link = document.createElement("a");
+        link.href = "./index.html?url=" + encodeURIComponent(linkData.url) +
+                    "&title=" + encodeURIComponent(linkData.title) +
+                    "&icon=" + encodeURIComponent(linkData.icon);
+        link.target = "_blank"; // Open link in a new tab
+        link.textContent = linkData.title;
+
+        var icon = document.createElement("img");
+        icon.src = linkData.icon;
+        icon.alt = linkData.title;
+        icon.style.width = "16px"; // Adjust the size of the icon as needed
+
+        link.appendChild(icon);
+
+        return link;
+    }
+
+    // Function to display the list of clickable links
+    function displayLinks(data) {
+        var linkList = document.getElementById("linkList");
+
+        data.forEach(function(item) {
+            var link = createLink(item);
+            linkList.appendChild(link);
+            linkList.appendChild(document.createElement("br")); // Add a line break for better separation
+        });
+    }
+
+    // Display the links when the DOM is ready
+    displayLinks(jsonData);
+});
+</script>
+
+</body>
+</html>
+
